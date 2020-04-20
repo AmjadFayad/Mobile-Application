@@ -18,7 +18,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_margin="16dp"
-        android:clickable="true"
         android:textAllCaps="true"
         android:textColor="@color/colorAccent"
         android:textStyle="bold"
