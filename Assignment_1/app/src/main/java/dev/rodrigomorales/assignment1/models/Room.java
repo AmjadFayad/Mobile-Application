@@ -50,6 +50,10 @@ public class Room implements Parcelable {
         return roomType;
     }
 
+    public void setCostPerNight(Integer costPerNight) {
+        this.costPerNight = costPerNight;
+    }
+
     @Override
     public int describeContents() {
         return 0;

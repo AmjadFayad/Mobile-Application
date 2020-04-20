@@ -1,4 +1,4 @@
-package dev.rodrigomorales.assignment1;
+package dev.rodrigomorales.assignment1.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,7 +9,8 @@ import android.os.Bundle;
 import java.util.ArrayList;
 import java.util.List;
 
-import dev.rodrigomorales.assignment1.adapters.RoomsRVAdapter;
+import dev.rodrigomorales.assignment1.R;
+import dev.rodrigomorales.assignment1.view.adapters.RoomsRVAdapter;
 import dev.rodrigomorales.assignment1.models.Room;
 
 public class MainActivity extends AppCompatActivity {

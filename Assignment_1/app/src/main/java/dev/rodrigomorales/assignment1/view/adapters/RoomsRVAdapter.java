@@ -1,10 +1,11 @@
-package dev.rodrigomorales.assignment1.adapters;
+package dev.rodrigomorales.assignment1.view.adapters;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -60,6 +61,7 @@ public class RoomsRVAdapter extends RecyclerView.Adapter<RoomsRVAdapter.RoomsHol
                 public void onClick(View v) {
                     Intent i = new Intent(itemView.getContext(), ReservationActivity.class);
                     i.putExtra("room", room);
+                    i.putExtra("cost", room.getCostPerNight());
                     itemView.getContext().startActivity(i);
                 }
             });
