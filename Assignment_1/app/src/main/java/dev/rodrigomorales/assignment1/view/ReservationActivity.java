@@ -1,9 +1,5 @@
 package dev.rodrigomorales.assignment1.view;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +9,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -20,7 +19,6 @@ import java.util.Date;
 
 import dev.rodrigomorales.assignment1.R;
 import dev.rodrigomorales.assignment1.models.Room;
-import dev.rodrigomorales.assignment1.models.Stay;
 
 public class ReservationActivity extends AppCompatActivity {
 
@@ -104,6 +102,13 @@ public class ReservationActivity extends AppCompatActivity {
         return sdf.format(c.getTime());
     }
 
+    /**
+     * Gathers everything to complete a Stay obj = initial date, final date, and room
+     * @param calendar to get initial date
+     * @param daysAmount to calculate final daate
+     * @param submit to get info when clicked
+     * @param room to set the room to the stay obj
+     */
     private void computeStay(final CalendarView calendar, final EditText daysAmount, Button submit, final Room room) {
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -116,12 +121,6 @@ public class ReservationActivity extends AppCompatActivity {
                     Integer amountOfDays = getStay(daysAmount);
                     String endStay = computeEndOfStay(initStay, amountOfDays);
                     int totalCost = room.getCostPerNight() * amountOfDays;
-
-                    Stay stay = new Stay(room, initStay, endStay, totalCost);
-
-                    Intent i = new Intent(getApplicationContext(), ConfirmActivity.class);
-                    i.putExtra("stay", stay);
-                    startActivity(i);
                 }
             }
         });
