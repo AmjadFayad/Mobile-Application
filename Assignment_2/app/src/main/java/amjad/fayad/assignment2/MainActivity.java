@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private static EditText[] editTexts;
     private Spinner spinner;
     private int tryCount;
+    private int[] lotteryNumbers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +28,30 @@ public class MainActivity extends AppCompatActivity {
 
         spinner = spinnerSetup();
         editTexts = editTextsSetup();
+        tryCount = 5;
 
-        tryCount = 0;
+        lotteryNumbers = generateNumbers();
+
+        Button btnPlay = findViewById(R.id.btnPlay);
+        btnPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean validation = validateInput(editTexts);
+                if (validation) {
+                    play(lotteryNumbers);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Invalid input. Fill in each space with a number ranging from 1 - 42", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
+    /**
+     * Performs setup for the spinner
+     * 2 String options
+     * Adapter and layout
+     * @return a spinner with its setup
+     */
     private Spinner spinnerSetup() {
         Spinner spinner = findViewById(R.id.spinnerGameType);
         String[] spinnerOptions = new String[] {"In Order", "Random"};
@@ -42,6 +64,10 @@ public class MainActivity extends AppCompatActivity {
         return spinner;
     }
 
+    /**
+     * Gets all edit texts in the parent view
+     * @return Array of Edit Texts
+     */
     private EditText[] editTextsSetup() {
         EditText[] editTexts = new EditText[6];
         LinearLayout holderView = findViewById(R.id.etHolder);
@@ -57,6 +83,10 @@ public class MainActivity extends AppCompatActivity {
         return editTexts;
     }
 
+    /**
+     * Generates an array of 6 random integers between 1 and 42
+     * @return array of 6 ints
+     */
     private int[] generateNumbers() {
         Random r = new Random();
         int[] nums = new int[6];
@@ -76,14 +106,60 @@ public class MainActivity extends AppCompatActivity {
         return nums;
     }
 
-    public void play(View v) {
+    /**
+     * Validates input from Edit Texts
+     * Not empty and not greater than 42
+     * @param editTexts to be validated
+     * @return a boolean, true for valid input and false for invalid
+     */
+    private boolean validateInput(EditText[] editTexts) {
 
-        while (tryCount < 5) {
+        boolean validation = true;
 
-            int[] lotteryNumbers = generateNumbers();
-            int[] userNumbers = getEditTextsInput(editTexts);
+        for (EditText x : editTexts) {
+            if (x.getText().toString().trim().isEmpty() || Integer.parseInt(x.getText().toString()) > 42) {
+                validation = false;
+            }
+        }
+
+        return validation;
+    }
+
+    /**
+     * Obtains input from Edit Texts
+     * @param editTexts to obtain numbers
+     * @return int array with the numbers from the Edit Texts
+     */
+    private int[] getEditTextsInput(EditText[] editTexts) {
+
+        int[] userNumbers = new int[6];
+        int i = 0;
+
+        for (EditText editText : editTexts) {
+
+            if (i == 0)
+                userNumbers[i] = Integer.parseInt(editText.getText().toString());
+
+            if (i > 0 && Integer.parseInt(editText.getText().toString()) != userNumbers[i-1])
+                userNumbers[i] = Integer.parseInt(editText.getText().toString());
+
+            i++;
+        }
+
+        return userNumbers;
+    }
+
+    /**
+     *
+     * @param lotteryNumbers to compare with the
+     */
+    private void play(int[] lotteryNumbers) {
+
+        while (tryCount > 0) {
 
             String gameType = spinner.getSelectedItem().toString();
+            int[] userNumbers = getEditTextsInput(editTexts);
+
             int correctNumbers;
 
             switch (gameType) {
@@ -103,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
                     } else if (correctNumbers == 4) {
                         Toast.makeText(getApplicationContext(), "You guessed 4! You win $5,000!!!", Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Please try again. You have " + (tryCount+1) + " tries left", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Please try again. You have " + (5-(tryCount+1)) + " tries left", Toast.LENGTH_LONG).show();
                     }
 
                     break;
@@ -125,47 +201,33 @@ public class MainActivity extends AppCompatActivity {
                     } else if (correctNumbers == 4) {
                         Toast.makeText(getApplicationContext(), "You guessed 4! You win $5,000!!!", Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Please try again. You have " + (tryCount+1) + " tries left", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Please try again. You have " + (5-(tryCount+1)) + " tries left", Toast.LENGTH_LONG).show();
                     }
 
                     break;
             }
 
-            tryCount++;
+            tryCount--;
         }
-
     }
 
-    private int[] getEditTextsInput(EditText[] editTexts) {
-
-        int[] userNumbers = new int[6];
-        int i = 0;
-
-        for (EditText editText : editTexts) {
-            if (editText.getText().toString().isEmpty()) {
-                Toast.makeText(getApplicationContext(), "Please fill in all 6 numbers", Toast.LENGTH_SHORT).show();
-                break;
-            } else {
-
-                if (i == 0)
-                    userNumbers[i] = Integer.parseInt(editText.getText().toString());
-
-                if (i > 0 && Integer.parseInt(editText.getText().toString()) != userNumbers[i-1])
-                    userNumbers[i] = Integer.parseInt(editText.getText().toString());
-
-                i++;
-            }
-        }
-
-        return userNumbers;
-    }
-
+    /**
+     * Reset for Button
+     * @param v associated with the button
+     */
     public void resetGame(View v) {
+        resetGame();
+    }
 
+    /**
+     * Clears all Edit Text fields and resets try count to 5
+     */
+    private void resetGame() {
         for (EditText x : editTexts) {
             x.setText("");
         }
 
-        tryCount = 0;
+        lotteryNumbers = generateNumbers();
+        tryCount = 5;
     }
 }
