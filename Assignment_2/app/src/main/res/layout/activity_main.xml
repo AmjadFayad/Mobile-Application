@@ -8,6 +8,87 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Select the Game level" />
 
+    <Spinner
+        android:id="@+id/spinnerGameType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Lottery Numbers Generator"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
+
+    <LinearLayout
+        android:id="@+id/etHolder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <EditText
+            android:id="@+id/etNumber1"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
+
+        <EditText
+            android:id="@+id/etNumber2"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
+
+        <EditText
+            android:id="@+id/etNumber3"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
+
+        <EditText
+            android:id="@+id/etNumber4"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
+
+        <EditText
+            android:id="@+id/etNumber5"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
+
+        <EditText
+            android:id="@+id/etNumber6"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
+
+    </LinearLayout>
+
+    <Button
+        android:onClick="play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_gravity="center"
+        android:text="Start Game" />
+
+    <Button
+        android:onClick="resetGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_gravity="center"
+        android:text="Reset Game" />
 
 </LinearLayout>
