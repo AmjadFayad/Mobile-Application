@@ -124,6 +124,7 @@ public class ReservationActivity extends AppCompatActivity {
                     int totalCost = room.getCostPerNight() * amountOfDays;
 
                     String emailBody = "Your room type: " + room.getName() + ", Total cost: $" + totalCost + " for " + amountOfDays + " nights, check-in date: " + initStay;
+                    sendReservation(emailBody);
                 }
             }
         });
