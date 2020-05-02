@@ -3,6 +3,7 @@ package amjad.fayad.assignment1.views;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -121,9 +122,21 @@ public class ReservationActivity extends AppCompatActivity {
                     Integer amountOfDays = getStay(daysAmount);
                     String endStay = computeEndOfStay(initStay, amountOfDays);
                     int totalCost = room.getCostPerNight() * amountOfDays;
+
+                    String emailBody = "Your room type: " + room.getName() + ", Total cost: $" + totalCost + " for " + amountOfDays + " nights, check-in date: " + initStay;
                 }
             }
         });
+    }
+
+    private void sendReservation(String body) {
+        Intent email = new Intent(Intent.ACTION_SENDTO);
+        email.setType("text/plain");
+        email.putExtra(Intent.EXTRA_EMAIL, "youremail@email.com");
+        email.putExtra(Intent.EXTRA_SUBJECT, "Grand Hotel Reservation");
+        email.putExtra(Intent.EXTRA_TEXT, body);
+
+        startActivity(Intent.createChooser(email, "Grand Hotel Reservation"));
     }
 
     /**
