@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/octan95"
+        android:id="@+id/edOctan95"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -31,7 +31,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <EditText
-        android:id="@+id/octan98"
+        android:id="@+id/edOctan98"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -39,7 +39,7 @@
         android:ems="10"
         android:inputType="number"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/octan95" />
+        app:layout_constraintTop_toBottomOf="@+id/edOctan95" />
 
     <TextView
         android:id="@+id/textView4"
@@ -50,7 +50,7 @@
         android:layout_marginEnd="16dp"
         android:text="Price per 1000 liters of 95 octan"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/octan95"
+        app:layout_constraintStart_toEndOf="@+id/edOctan95"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <TextView
@@ -73,9 +73,11 @@
         android:text="Show"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/octan98" />
+        app:layout_constraintTop_toBottomOf="@+id/edOctan98" />
 
     <TableLayout
+        android:id="@+id/table"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -110,7 +112,8 @@
             android:layout_height="match_parent" >
 
             <TextView
-                android:text="98"
+                android:id="@+id/octan95Val"
+                android:text="790,250"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
@@ -118,52 +121,19 @@
                 android:layout_marginEnd="16dp"/>
 
             <TextView
-                android:text="95"
+                android:id="@+id/octan98Val"
+                android:text="757,750"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="2"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"/>
 
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
             <TextView
-                android:text="98"
+                android:text="some arabic text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_column="1"
-                android:layout_margin="16dp"/>
-
-            <TextView
-                android:text="95"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="2"
-                android:layout_margin="16dp"/>
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:text="98"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="1"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"/>
-
-            <TextView
-                android:text="95"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="2"
+                android:layout_column="3"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"/>
 
@@ -174,59 +144,24 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:text="98"
+                android:text="247,500"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:layout_margin="16dp"/>
 
             <TextView
-                android:text="95"
+                android:text="253,000"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="2"
                 android:layout_margin="16dp"/>
 
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
             <TextView
-                android:text="98"
+                android:text="some arabic text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_column="1"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"/>
-
-            <TextView
-                android:text="95"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="2"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"/>
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:text="98"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="1"
-                android:layout_margin="16dp"/>
-
-            <TextView
-                android:text="95"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="2"
+                android:layout_column="3"
                 android:layout_margin="16dp"/>
 
         </TableRow>
@@ -236,7 +171,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:text="98"
+                android:text="10,000"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
@@ -244,10 +179,18 @@
                 android:layout_marginEnd="16dp"/>
 
             <TextView
-                android:text="95"
+                android:text="10,000"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="2"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"/>
+
+            <TextView
+                android:text="some arabic text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="3"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"/>
 
@@ -258,17 +201,24 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:text="98"
+                android:text="16,000"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:layout_margin="16dp"/>
 
             <TextView
-                android:text="95"
+                android:text="16,000"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="2"
+                android:layout_margin="16dp"/>
+
+            <TextView
+                android:text="some arabic text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="3"
                 android:layout_margin="16dp"/>
 
         </TableRow>
@@ -278,7 +228,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:text="98"
+                android:text="71,250"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
@@ -286,10 +236,132 @@
                 android:layout_marginEnd="16dp"/>
 
             <TextView
-                android:text="95"
+                android:text="71,250"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="2"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"/>
+
+            <TextView
+                android:text="some arabic text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="3"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="1,135,000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_margin="16dp"/>
+
+            <TextView
+                android:text="1,108,000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:layout_margin="16dp"/>
+
+            <TextView
+                android:text="some arabic text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="3"
+                android:layout_margin="16dp"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="124,850"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"/>
+
+            <TextView
+                android:text="121,880"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"/>
+
+            <TextView
+                android:text="some arabic text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="3"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="1,259,850"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_margin="16dp"/>
+
+            <TextView
+                android:text="1,229,880"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:layout_margin="16dp"/>
+
+            <TextView
+                android:text="some arabic text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="3"
+                android:layout_margin="16dp"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="25,197"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"/>
+
+            <TextView
+                android:text="24,597"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"/>
+
+            <TextView
+                android:text="some arabic text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="3"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"/>
 
