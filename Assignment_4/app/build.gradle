@@ -21,6 +21,10 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -47,6 +51,9 @@ dependencies {
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
+
+    // Volley as an alternative to Retrofit
+    implementation 'com.android.volley:volley:1.1.1'
 
     // Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'

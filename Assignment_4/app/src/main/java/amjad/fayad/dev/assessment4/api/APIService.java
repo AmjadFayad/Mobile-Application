@@ -12,6 +12,6 @@ public interface APIService {
      * GET request to obtain a List of type Currency from the repository.
      * @return a Call petition
      */
-    @GET("currencies")
+    @GET("currencies.json")
     Call<List<Currency>> getCurrencies();
 }

@@ -57,6 +57,8 @@ public class CurrencyRVAdapter extends RecyclerView.Adapter<CurrencyRVAdapter.Cu
             bdlValTxtView = itemView.findViewById(R.id.tv_bdl);
             realValTxtView = itemView.findViewById(R.id.tv_real);
             gapTxtView = itemView.findViewById(R.id.tv_gap);
+
+            currencyImgView = itemView.findViewById(R.id.iv_currency);
         }
 
         /**
@@ -65,9 +67,9 @@ public class CurrencyRVAdapter extends RecyclerView.Adapter<CurrencyRVAdapter.Cu
          */
         void bind(Currency c) {
             currencyTxtView.setText(c.getTitle());
-            bdlValTxtView.setText(c.getVbdl());
-            realValTxtView.setText(c.getRealvalue());
-            gapTxtView.setText(c.getGap());
+            bdlValTxtView.setText(itemView.getContext().getResources().getString(R.string.price_according_to_bdl) + " " + c.getVbdl());
+            realValTxtView.setText(itemView.getContext().getResources().getString(R.string.real_price) + " " + c.getRealvalue());
+            gapTxtView.setText(itemView.getContext().getResources().getString(R.string.gap) + " " + c.getGap());
 
             Picasso.get()
                     .load(c.getImage())
