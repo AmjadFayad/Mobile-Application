@@ -26,40 +26,6 @@ public class Currency {
         this.realvalue = realvalue;
     }
 
-    /**
-     * Constructor including GAP to be calculated
-     * @param id
-     * @param title
-     * @param vbdl
-     * @param realvalue
-     * @param gap
-     */
-    public Currency(Integer id, String title, String vbdl, Integer realvalue, Integer gap) {
-        this.id = id;
-        this.title = title;
-        this.vbdl = vbdl;
-        this.realvalue = realvalue;
-        this.gap = gap;
-    }
-
-    /**
-     * Constructor including gap and image
-     * @param id
-     * @param title
-     * @param vbdl
-     * @param realvalue
-     * @param gap
-     * @param image
-     */
-    public Currency(Integer id, String title, String vbdl, Integer realvalue, Integer gap, int image) {
-        this.id = id;
-        this.title = title;
-        this.vbdl = vbdl;
-        this.realvalue = realvalue;
-        this.gap = gap;
-        this.image = image;
-    }
-
     public Integer getId() {
         return id;
     }
