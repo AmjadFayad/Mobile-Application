@@ -3,4 +3,5 @@
     <string name="price_according_to_bdl">Price according to BDL: </string>
     <string name="real_price">Real price: </string>
     <string name="gap">GAP: </string>
+    <string name="calculate">Calculate</string>
 </resources>

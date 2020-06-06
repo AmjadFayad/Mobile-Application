@@ -65,6 +65,7 @@ public class CurrencyRVAdapter extends RecyclerView.Adapter<CurrencyRVAdapter.Cu
 
         /**
          * Binds values of a Currency obj to its corresponding xml widgets
+         * Set onClickListener to the itemView
          * @param c Currency to get vals
          */
         void bind(Currency c) {
@@ -86,6 +87,7 @@ public class CurrencyRVAdapter extends RecyclerView.Adapter<CurrencyRVAdapter.Cu
                     i.putExtra("name", c.getTitle());
                     i.putExtra("vbdl", c.getVbdl());
                     i.putExtra("real", c.getRealvalue());
+                    i.putExtra("image", c.getImage());
                     itemView.getContext().startActivity(i);
                 }
             });
