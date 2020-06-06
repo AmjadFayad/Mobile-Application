@@ -96,6 +96,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Computes gap per currency based on vbdl and real value
+     * Attaches the corresponding image to each currency
+     * @param currencies to get each currency obj
+     */
     private void setGapAndImageToCurrencies(List<Currency> currencies) {
         List<Integer> images = getImages();
         int i = 0;
@@ -107,6 +112,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Fetches local images in a list
+     * @return list of images
+     */
     private List<Integer> getImages() {
 
         List<Integer> images = new ArrayList<>();

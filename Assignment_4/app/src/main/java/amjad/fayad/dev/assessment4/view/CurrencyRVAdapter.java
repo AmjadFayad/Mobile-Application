@@ -1,5 +1,6 @@
 package amjad.fayad.dev.assessment4.view;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import amjad.fayad.dev.assessment4.DetailsActivity;
 import amjad.fayad.dev.assessment4.R;
 import amjad.fayad.dev.assessment4.models.Currency;
 
@@ -75,6 +77,18 @@ public class CurrencyRVAdapter extends RecyclerView.Adapter<CurrencyRVAdapter.Cu
                     .load(c.getImage())
                     .fit()
                     .into(currencyImgView);
+
+            itemView.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+
+                if (position != RecyclerView.NO_POSITION) {
+                    Intent i = new Intent(itemView.getContext(), DetailsActivity.class);
+                    i.putExtra("name", c.getTitle());
+                    i.putExtra("vbdl", c.getVbdl());
+                    i.putExtra("real", c.getRealvalue());
+                    itemView.getContext().startActivity(i);
+                }
+            });
         }
     }
 
