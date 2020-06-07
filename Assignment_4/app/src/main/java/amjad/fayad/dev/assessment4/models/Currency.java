@@ -1,8 +1,15 @@
 package amjad.fayad.dev.assessment4.models;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.SerializedName;
 
+@Entity(tableName = "currency")
 public class Currency {
+
+    @PrimaryKey(autoGenerate = true)
+    private Integer localId;
 
     private Integer id;
     private String title;
