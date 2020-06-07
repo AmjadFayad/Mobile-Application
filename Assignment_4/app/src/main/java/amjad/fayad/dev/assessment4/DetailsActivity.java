@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -20,10 +21,6 @@ public class DetailsActivity extends AppCompatActivity {
     private Integer bdlVal;
     private Integer realVal;
     private Integer image;
-
-    private Integer resultBdl;
-    private Integer resultRealVal;
-    private Integer resultGap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,16 +47,14 @@ public class DetailsActivity extends AppCompatActivity {
         TextView tvRealVal = findViewById(R.id.tv_real_details);
         TextView tvGap = findViewById(R.id.tv_gap_details);
 
-        btnCalculate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Integer rawInput = Integer.parseInt(currencyInput.getText().toString());
+        btnCalculate.setOnClickListener(v -> {
+            String rawInput = currencyInput.getText().toString();
 
-                if (rawInput > 0) {
-                    computeResults(rawInput);
-                    resultsLayout.setVisibility(View.VISIBLE);
-                    setResults(tvBdl, tvRealVal, tvGap);
-                }
+            if (rawInput.isEmpty()) {
+                Toast.makeText(getApplicationContext(), "Please input a valid amount", Toast.LENGTH_SHORT).show();
+            } else {
+                resultsLayout.setVisibility(View.VISIBLE);
+                setResults(tvBdl, tvRealVal, tvGap);
             }
         });
     }
@@ -75,25 +70,15 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     /**
-     * Computes results (BDL, Real Value and Gap) for the respective user input
-     * @param input user input in Lebanese pound
-     */
-    private void computeResults(Integer input) {
-        resultBdl = input/bdlVal;
-        resultRealVal = input/realVal;
-        resultGap = resultRealVal - resultBdl;
-    }
-
-    /**
      * Sets values obtained from computeResults() to the xml widgets
      * @param bdl tv
-     * @param realVal tv
+     * @param tvRealVal tv
      * @param gap tv
      */
-    private void setResults(TextView bdl, TextView realVal, TextView gap) {
-        bdl.setText(getResources().getString(R.string.price_according_to_bdl) + " " + resultBdl);
-        realVal.setText(getResources().getString(R.string.real_price) + " " + resultRealVal);
-        gap.setText(getResources().getString(R.string.gap) + " " + resultGap);
+    private void setResults(TextView bdl, TextView tvRealVal, TextView gap) {
+        bdl.setText(getResources().getString(R.string.price_according_to_bdl) + " " + bdlVal);
+        tvRealVal.setText(getResources().getString(R.string.real_price) + " " + realVal);
+        gap.setText(getResources().getString(R.string.gap) + " " + (realVal - bdlVal));
     }
 
     @Override
