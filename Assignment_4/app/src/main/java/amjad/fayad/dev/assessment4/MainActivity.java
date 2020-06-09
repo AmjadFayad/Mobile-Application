@@ -1,5 +1,8 @@
 package amjad.fayad.dev.assessment4;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -41,14 +44,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         recyclerViewSetup();
+        boolean isConnected = getConnectionState();
 
         retrofitSetup();
         dbSetup();
 
-        List<Currency> localCurrencies = getDBCurrencies();
-
-        if (localCurrencies.isEmpty()) {
-            getCurrencies();
+        if (isConnected) {
+            getCurrenciesFromAPI();
+        } else {
+            getCurrenciesFromDB();
+            if (currencies.isEmpty()) {
+                Toast.makeText(getApplicationContext(), "No available currencies", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -62,19 +69,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Performs setup for the local db
+     * Checks if the app is connected
+     * @return true (connected) or false (not connected)
      */
-    private void dbSetup() {
-        db = Room.databaseBuilder(getApplicationContext(), CurrencyDB.class, "currencydb").build();
-        currencyViewModel = new ViewModelProvider(this).get(CurrencyViewModel.class);
-    }
+    private boolean getConnectionState() {
 
-    /**
-     * Retrieves currencies stores in local db
-     * @return list of currencies
-     */
-    private List<Currency> getDBCurrencies() {
-        return (List<Currency>) currencyViewModel.getAllCurrencies();
+        ConnectivityManager cm = (ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNet = cm.getActiveNetworkInfo();
+
+        return activeNet != null && activeNet.isConnected();
     }
 
     /**
@@ -90,11 +93,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Performs setup for the local db
+     */
+    private void dbSetup() {
+        db = Room.databaseBuilder(getApplicationContext(), CurrencyDB.class, "currencydb").build();
+        currencyViewModel = new ViewModelProvider(this).get(CurrencyViewModel.class);
+    }
+
+    /**
      * Performs the GET request to the API
      * Sets the result to the List of type Currency currencies
      * On failure shows an error message
      */
-    private void getCurrencies() {
+    private void getCurrenciesFromAPI() {
 
         Call<List<Currency>> call = api.getCurrencies();
         call.enqueue(new Callback<List<Currency>>() {
@@ -122,6 +133,22 @@ public class MainActivity extends AppCompatActivity {
                         Toast.LENGTH_LONG ).show();
             }
         });
+    }
+
+    /**
+     * Retrieves currencies stores in local db
+     * @return list of currencies
+     */
+    private void getCurrenciesFromDB() {
+
+        currencies = (List<Currency>) currencyViewModel.getAllCurrencies();
+
+        if (adapter == null) {
+            adapter = new CurrencyRVAdapter(currencies);
+            rvCurrencies.setAdapter(adapter);
+        } else {
+            adapter.appendCurrencies(currencies);
+        }
     }
 
     /**
