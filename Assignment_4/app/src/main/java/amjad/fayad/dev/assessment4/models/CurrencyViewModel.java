@@ -8,9 +8,10 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-import amjad.fayad.dev.assessment4.models.Currency;
-import amjad.fayad.dev.assessment4.models.CurrencyRepository;
-
+/**
+ * ViewModel class for Currency entity
+ * Core part of Android Architecture components and used for db communication
+ */
 public class CurrencyViewModel extends AndroidViewModel {
 
     private CurrencyRepository repository;

@@ -7,11 +7,21 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
+/**
+ * Repository class for Currency entity
+ * Used for networking, makes easier processing connection to web services
+ */
 public class CurrencyRepository {
 
     private CurrencyDAO currencyDAO;
     private LiveData<List<Currency>> allCurrencies;
 
+    /**
+     * Obtains the instance of the database
+     * Obtains the dao for the currency entity
+     * Retrieves the list of currency objs
+     * @param application required to get the instance of the db
+     */
     CurrencyRepository(Application application) {
         CurrencyDB database = CurrencyDB.getInstance(application);
         currencyDAO = database.currencyDAO();
@@ -19,6 +29,10 @@ public class CurrencyRepository {
         allCurrencies = currencyDAO.getAllCurrencies();
     }
 
+    /**
+     * Create
+     * @param currency
+     */
     void create(Currency currency) {
         new InsertCurrencyAsync(currencyDAO).execute(currency);
     }
@@ -27,11 +41,15 @@ public class CurrencyRepository {
         return allCurrencies;
     }
 
+    /**
+     * Async task class to insert a new Currency obj into the db
+     * Required to perform db operations in another thread (not the main)
+     */
     private static class InsertCurrencyAsync extends AsyncTask<Currency, Void, Void> {
 
         private CurrencyDAO currencyDAO;
 
-        public InsertCurrencyAsync(CurrencyDAO currencyDAO) {
+        InsertCurrencyAsync(CurrencyDAO currencyDAO) {
             this.currencyDAO = currencyDAO;
         }
 
