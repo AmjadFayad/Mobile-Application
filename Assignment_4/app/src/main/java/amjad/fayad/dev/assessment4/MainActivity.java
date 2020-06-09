@@ -1,10 +1,10 @@
 package amjad.fayad.dev.assessment4;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
@@ -15,6 +15,7 @@ import java.util.List;
 import amjad.fayad.dev.assessment4.api.APIService;
 import amjad.fayad.dev.assessment4.models.Currency;
 import amjad.fayad.dev.assessment4.models.CurrencyDB;
+import amjad.fayad.dev.assessment4.models.CurrencyViewModel;
 import amjad.fayad.dev.assessment4.utils.Utils;
 import amjad.fayad.dev.assessment4.view.CurrencyRVAdapter;
 import retrofit2.Call;
@@ -32,18 +33,23 @@ public class MainActivity extends AppCompatActivity {
     private APIService api;
 
     public static CurrencyDB db;
+    private CurrencyViewModel currencyViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        db = Room.databaseBuilder(getApplicationContext(), CurrencyDB.class, "currencydb").build();
-
         recyclerViewSetup();
 
         retrofitSetup();
-        getCurrencies();
+        dbSetup();
+
+        List<Currency> localCurrencies = getDBCurrencies();
+
+        if (localCurrencies.isEmpty()) {
+            getCurrencies();
+        }
     }
 
     /**
@@ -53,6 +59,22 @@ public class MainActivity extends AppCompatActivity {
     private void recyclerViewSetup() {
         rvCurrencies = findViewById(R.id.rvMain);
         rvCurrencies.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+    }
+
+    /**
+     * Performs setup for the local db
+     */
+    private void dbSetup() {
+        db = Room.databaseBuilder(getApplicationContext(), CurrencyDB.class, "currencydb").build();
+        currencyViewModel = new ViewModelProvider(this).get(CurrencyViewModel.class);
+    }
+
+    /**
+     * Retrieves currencies stores in local db
+     * @return list of currencies
+     */
+    private List<Currency> getDBCurrencies() {
+        return (List<Currency>) currencyViewModel.getAllCurrencies();
     }
 
     /**
