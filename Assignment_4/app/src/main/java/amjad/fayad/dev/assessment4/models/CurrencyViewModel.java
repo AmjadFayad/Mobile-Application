@@ -28,7 +28,7 @@ public class CurrencyViewModel extends AndroidViewModel {
         repository.create(currency);
     }
 
-    public List<Currency> getAllCurrencies() {
-        return (List<Currency>) allCurrencies;
+    public LiveData<List<Currency>> getAllCurrencies() {
+        return allCurrencies;
     }
 }

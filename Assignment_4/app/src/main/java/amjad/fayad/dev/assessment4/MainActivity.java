@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             getCurrenciesFromAPI();
         } else {
             getCurrenciesFromDB();
-            if (currencies.isEmpty()) {
+            if (currencies == null || currencies.isEmpty()) {
                 Toast.makeText(getApplicationContext(), "No available currencies", Toast.LENGTH_SHORT).show();
             }
         }
@@ -143,14 +143,19 @@ public class MainActivity extends AppCompatActivity {
      */
     private void getCurrenciesFromDB() {
 
-        currencies = (List<Currency>) currencyViewModel.getAllCurrencies();
+        currencies = currencyViewModel.getAllCurrencies().getValue();
 
-        if (adapter == null) {
-            adapter = new CurrencyRVAdapter(currencies);
-            rvCurrencies.setAdapter(adapter);
+        if (currencies == null || currencies.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "No available currencies", Toast.LENGTH_SHORT).show();
         } else {
-            adapter.appendCurrencies(currencies);
+            if (adapter == null) {
+                adapter = new CurrencyRVAdapter(currencies);
+                rvCurrencies.setAdapter(adapter);
+            } else {
+                adapter.appendCurrencies(currencies);
+            }
         }
+
     }
 
     /**
@@ -195,7 +200,8 @@ public class MainActivity extends AppCompatActivity {
      */
     private void saveCurrenciesToDB(List<Currency> currencies) {
         for (Currency c : currencies) {
-            if (currencyViewModel.getAllCurrencies().isEmpty()) {
+            if (currencyViewModel.getAllCurrencies().getValue() == null ||
+                    currencyViewModel.getAllCurrencies().getValue().isEmpty()) {
                 currencyViewModel.create(c);
             }
         }

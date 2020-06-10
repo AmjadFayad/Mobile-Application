@@ -36,20 +36,44 @@ public class Currency {
         this.realvalue = realvalue;
     }
 
+    public Integer getLocalId() {
+        return localId;
+    }
+
+    public void setLocalId(Integer localId) {
+        this.localId = localId;
+    }
+
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getTitle() {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public Integer getVbdl() {
         return vbdl;
     }
 
+    public void setVbdl(Integer vbdl) {
+        this.vbdl = vbdl;
+    }
+
     public Integer getRealvalue() {
         return realvalue;
+    }
+
+    public void setRealvalue(Integer realvalue) {
+        this.realvalue = realvalue;
     }
 
     public Integer getGap() {
