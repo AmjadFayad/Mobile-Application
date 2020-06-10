@@ -122,6 +122,8 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             adapter.appendCurrencies(currencies);
                         }
+
+                        saveCurrenciesToDB(currencies);
                     }
                 }
             }
@@ -185,6 +187,18 @@ public class MainActivity extends AppCompatActivity {
         images.add(qatar);
 
         return images;
+    }
+
+    /**
+     * Stores the list of currencies from the API request to the db
+     * @param currencies list of Currency objs
+     */
+    private void saveCurrenciesToDB(List<Currency> currencies) {
+        for (Currency c : currencies) {
+            if (currencyViewModel.getAllCurrencies().isEmpty()) {
+                currencyViewModel.create(c);
+            }
+        }
     }
 
     // VOLLEY ALTERNATIVE AS AN HTTP CLIENT //
