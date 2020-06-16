@@ -95,8 +95,8 @@ public class CurrencyRVAdapter extends RecyclerView.Adapter<CurrencyRVAdapter.Cu
     }
 
     /**
-     * After a refresh adds new currencies fetched from the API, if any, to the current list
-     * in the adapter and notifies that the dataset has changed.
+     * After a refresh, adds new currencies fetched from the API, if any, to the current list
+     * in the adapter and notifies that the data set has changed.
      * @param newCurrencies list of currencies to append
      */
     public void appendCurrencies(List<Currency> newCurrencies) {

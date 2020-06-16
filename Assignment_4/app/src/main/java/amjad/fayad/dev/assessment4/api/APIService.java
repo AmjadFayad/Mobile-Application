@@ -9,7 +9,7 @@ import retrofit2.http.GET;
 public interface APIService {
 
     /**
-     * GET request to obtain a List of type Currency from the repository.
+     * GET request to obtain a List of type Currency from the API.
      * @return a Call petition
      */
     @GET("currencies.json")

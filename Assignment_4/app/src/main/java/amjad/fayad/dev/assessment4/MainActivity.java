@@ -200,8 +200,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void saveCurrenciesToDB(List<Currency> currencies) {
         for (Currency c : currencies) {
-            if (currencyViewModel.getAllCurrencies().getValue() == null ||
-                    currencyViewModel.getAllCurrencies().getValue().isEmpty()) {
+            if (currencyViewModel.getAllCurrencies().getValue() == null) {
                 currencyViewModel.create(c);
             }
         }
