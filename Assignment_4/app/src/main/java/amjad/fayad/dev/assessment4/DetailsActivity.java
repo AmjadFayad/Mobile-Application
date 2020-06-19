@@ -54,7 +54,7 @@ public class DetailsActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Please input a valid amount", Toast.LENGTH_SHORT).show();
             } else {
                 resultsLayout.setVisibility(View.VISIBLE);
-                setResults(tvBdl, tvRealVal, tvGap);
+                setResults(tvBdl, tvRealVal, tvGap, Integer.valueOf(rawInput));
             }
         });
     }
@@ -75,10 +75,10 @@ public class DetailsActivity extends AppCompatActivity {
      * @param tvRealVal tv
      * @param gap tv
      */
-    private void setResults(TextView bdl, TextView tvRealVal, TextView gap) {
-        bdl.setText(getResources().getString(R.string.price_according_to_bdl) + " " + bdlVal);
-        tvRealVal.setText(getResources().getString(R.string.real_price) + " " + realVal);
-        gap.setText(getResources().getString(R.string.gap) + " " + (realVal - bdlVal));
+    private void setResults(TextView bdl, TextView tvRealVal, TextView gap, Integer input) {
+        bdl.setText(getResources().getString(R.string.price_according_to_bdl) + " " + (input / bdlVal));
+        tvRealVal.setText(getResources().getString(R.string.real_price) + " " + (input / realVal));
+        gap.setText(getResources().getString(R.string.gap) + " " + ((input / bdlVal) - (input / realVal)));
     }
 
     @Override
